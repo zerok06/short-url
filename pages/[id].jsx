@@ -11,7 +11,7 @@ const Query = ({ data }) => {
   const router = useRouter();
   const redirect = useCallback(() => {
     router.push(shortData.urlBase);
-    console.log(data);
+    console.log(shortData);
   });
   const [] = useTimeoutFn(redirect, 3000);
   return (
