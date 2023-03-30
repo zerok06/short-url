@@ -27,13 +27,17 @@ const Query = ({ data }) => {
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const { data } = await axios.post(
-    `${process.env.HOST_URL}/api/short-url/search`,
-    { id }
-  );
+  let data = {};
+  try {
+    data = await axios.post(`/api/short-url/search`, {
+      id,
+    });
+  } catch (error) {
+    console.error(error);
+  }
   return {
     props: {
-      data,
+      data: data.data,
     },
   };
 }
