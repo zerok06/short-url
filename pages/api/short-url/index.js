@@ -4,7 +4,6 @@ import ShortUrl from "../../../models/shortUrl";
 
 export default async function handler(req = NextRequest, res = NextResponse) {
   const { method } = req;
-  console.log(process.env.VERCEL_URL);
   switch (method) {
     case "POST":
       let { urlBase } = req.body;
