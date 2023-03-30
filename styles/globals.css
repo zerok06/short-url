@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 * {
   box-sizing: border-box;
@@ -9,10 +10,40 @@
   outline: none;
   font-family: "Inter", sans-serif;
 }
-
+bg-qr {
+  background: rgba(255, 255, 255, 0.4);
+}
+.bg-circles {
+  position: relative;
+}
+.bg-circles::after {
+  content: "";
+  right: 10rem;
+  bottom: 5rem;
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 100%;
+  background: #f64f59;
+  filter: blur(50px);
+  z-index: -1;
+}
+.bg-circles::before {
+  content: "";
+  right: 1rem;
+  bottom: 15rem;
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 100%;
+  background: #12c2e9;
+  filter: blur(50px);
+  z-index: -1;
+  box-shadow: inset 100px 10px 10px #c471ed;
+}
 html,
 body {
-  color-scheme: dark;
+  color-scheme: light;
   user-select: none;
 }
 
@@ -21,7 +52,7 @@ body {
 }
 
 .title-gradient {
-  background: linear-gradient(to right, #faff89, #ea72ad);
+  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

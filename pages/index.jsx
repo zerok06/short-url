@@ -13,23 +13,25 @@ export default function Home() {
         style={{
           marginTop: "80px",
           height: "90vh",
-          gridTemplateColumns: "1fr 2fr",
+          gridTemplateColumns: "2fr 1fr",
         }}
-        className="grid  w-11/12 m-auto"
+        className=" bg-circles grid gap-10  w-9/12 m-auto"
       >
-        <div>{urlShort && <Qr />}</div>
-        <div className=" flex justify-center items-center flex-col gap-5 ">
-          <h1 className="title-gradient uppercase text-5xl text-center font-bold w-4/5">
-            Acortar link sin crear cuenta
+        <div className=" flex justify-center items-start flex-col gap-5 ">
+          <h1 className="  text-6xl w-4/5">
+            <span className="font-semibold">Acortar tu link sin</span>
+            <span className="title-gradient font-extrabold"> crear cuenta</span>
           </h1>
-          <p className="text-center text-gray-300 w-4/5">
+          <p className=" text-gray-500 w-4/5 text-lg">
             ¿Cansado de URLs largas e inmanejables? ¡Prueba nuestra herramienta
             de acortamiento de URLs! No necesitas crear una cuenta, es fácil y
             rápido.
           </p>
           <FormShortUrl />
         </div>
+        <div>{urlShort && <Qr />}</div>
       </main>
+
       <footer className="w-full">
         Desarrollador por el equipo de <a href="#">FoxDesign</a>
       </footer>

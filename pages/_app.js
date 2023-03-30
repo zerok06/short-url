@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }) {
           <title>Foxify - Home</title>
         </Head>
         <Component {...pageProps} />
-        <Toaster position="top-center" reverseOrder={true} />
+        <Toaster position="bottom-center" reverseOrder={true} />
       </AnimatePresence>
     </>
   );

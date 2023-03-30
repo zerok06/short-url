@@ -47,28 +47,29 @@ const FormShortUrl = () => {
     <>
       <form
         action="#"
-        className="flex flex-col gap-4 w-full items-center"
+        className="flex flex-col gap-4 w-full items-start"
         onSubmit={handleForm}
       >
-        <label htmlFor="" className="flex flex-col w-full items-center">
+        <label htmlFor="" className="flex flex-col w-full items-start">
           <input
             type="text"
             placeholder="www.google.com"
-            className="rounded  leading-10 px-7 text-center outline-none w-1/3 focus:w-2/4 transition-all bg-gray-600"
+            className="rounded  leading-10 px-7 text-center outline-none w-1/3 focus:w-2/4 transition-all bg-gray-200"
             onChange={handleUrlBase}
             value={FormData.urlBase}
           />
         </label>
-        <button
-          type="submit"
-          disabled={!FormData.isValid}
-          className="border-rose-400 opacity-100  rounded-md border-2 leading-10 hover:bg-rose-400 transition w-48 disabled:grayscale"
-        >
-          Acortar
-        </button>
+        <span className="flex gap-4 items-center">
+          <button
+            type="submit"
+            disabled={!FormData.isValid}
+            className="border-rose-400 opacity-100 text-black rounded-md border-2 leading-10 hover:bg-rose-400 hover:text-white transition w-48 disabled:grayscale"
+          >
+            Acortar
+          </button>
+          {isLoading == false && <Spinner />}
+        </span>
       </form>
-      {isLoading == true && <ShortUrlPreview {...fetchData} />}
-      {isLoading == false && <Spinner />}
     </>
   );
 };
