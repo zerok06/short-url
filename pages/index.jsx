@@ -4,6 +4,7 @@ import Qr from "../components/Qr";
 import useQrState from "../store/useQrStore";
 export default function Home() {
   const { urlShort, setUrlShort } = useQrState((state) => state);
+  console.log(process.env.VERCEL_URL);
 
   return (
     <>
