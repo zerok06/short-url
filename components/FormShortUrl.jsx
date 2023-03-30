@@ -1,4 +1,5 @@
 import axios from "axios";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { RegExr } from "../helpers/ExpresionReg";
@@ -16,15 +17,23 @@ const FormShortUrl = () => {
   });
 
   const handleUrlBase = ({ target: { value } }) => {
-    if (value == "") {
-      setIsLoading(null);
-      setUrlShort({ value: "" });
+    if (!/(http|https)/.test(value)) {
+      setFormData(() => ({
+        ...FormData,
+        urlBase: value,
+        isValid: false,
+      }));
+    } else {
+      if (value == "") {
+        setIsLoading(null);
+        setUrlShort({ value: "" });
+      }
+      setFormData(() => ({
+        ...FormData,
+        urlBase: value,
+        isValid: true,
+      }));
     }
-    setFormData(() => ({
-      ...FormData,
-      urlBase: value,
-      isValid: RegExr.urlDetetor.test(value),
-    }));
   };
   const handleForm = async (e) => {
     e.preventDefault();
@@ -50,14 +59,28 @@ const FormShortUrl = () => {
         className="flex flex-col gap-4 w-full items-start"
         onSubmit={handleForm}
       >
-        <label htmlFor="" className="flex flex-col w-full items-start">
+        <label
+          htmlFor=""
+          className="flex flex-col mt-3 w-full relative items-start"
+        >
           <input
-            type="text"
+            type="url"
             placeholder="www.google.com"
-            className="rounded  leading-10 px-7 text-center outline-none w-1/3 focus:w-2/4 transition-all bg-gray-200"
+            className="rounded leading-10 px-7 text-center outline-none w-1/3 focus:w-2/4 transition-all bg-gray-200"
             onChange={handleUrlBase}
             value={FormData.urlBase}
           />
+          {FormData.isValid == false && (
+            <motion.span
+              style={{ top: "-3rem" }}
+              className=" error-pop py-1 px-2 text-sm bg-white rounded-md mt-3 absolute shadow-xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.3 } }}
+              exit={{ opacity: 0 }}
+            >
+              ❌ Verifique que la url tenga el protocolo 'http://'.
+            </motion.span>
+          )}
         </label>
         <span className="flex gap-4 items-center">
           <button

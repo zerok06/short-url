@@ -10,7 +10,8 @@
   outline: none;
   font-family: "Inter", sans-serif;
 }
-bg-qr {
+
+.bg-qr {
   background: rgba(255, 255, 255, 0.4);
 }
 .bg-circles {

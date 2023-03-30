@@ -1,18 +1,17 @@
-import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useTimeoutFn } from "react-use";
 import Ads from "../components/Ads";
 import Clock from "../components/Clock";
 import NavBar from "../components/NavBar";
+import axiosInstance from "../config/axiosRequest";
 
-const Query = ({ data }) => {
-  const [shortData] = useState(data);
+const Query = ({ urlBase }) => {
   const router = useRouter();
-  const redirect = useCallback(() => {
-    console.log(shortData);
-    router.push(shortData.urlBase);
-  });
+  console.log(urlBase);
+  const redirect = () => {
+    router.push(urlBase);
+  };
   const [] = useTimeoutFn(redirect, 3000);
   return (
     <>
@@ -28,13 +27,10 @@ const Query = ({ data }) => {
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const { data } = await axios.post(`/api/short-url/search`, {
-    id,
-  });
+  const { data } = await axiosInstance.post("/short-url/search", { id });
+  console.log(data);
   return {
-    props: {
-      data,
-    },
+    props: { ...data },
   };
 }
 

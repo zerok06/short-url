@@ -122,15 +122,16 @@ const Qr = () => {
                   className="bg-gray-200"
                   type="url"
                   placeholder="https://gatitos.com/1.png"
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    console.log(e.target.value);
                     setControls(() => ({
                       ...controls,
                       includeImage: {
                         ...controls.includeImage,
                         src: e.target.value,
                       },
-                    }))
-                  }
+                    }));
+                  }}
                 />
               </label>
               <label className="w-full flex justify-between items-center">

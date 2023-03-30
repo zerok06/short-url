@@ -13,7 +13,9 @@ export default async function handler(req = NextRequest, res = NextResponse) {
         });
       }
       if (!/(http|https)/.test(urlBase)) {
-        urlBase = "http://" + urlBase;
+        res.json({
+          msg: "Al parecer otra persona acorto la URL, puedes reutilizarla sin miedo. ",
+        });
       }
       try {
         await dbConnect();
