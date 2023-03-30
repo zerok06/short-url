@@ -13,10 +13,6 @@ const Query = ({ data }) => {
     router.push(shortData.urlBase);
   });
   const [] = useTimeoutFn(redirect, 3000);
-  useEffect(() => {
-    console.log(data);
-  }, []);
-
   return (
     <>
       <NavBar />
@@ -41,7 +37,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      data: data.data,
+      data: data?.data,
     },
   };
 }
