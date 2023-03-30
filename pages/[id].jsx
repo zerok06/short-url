@@ -10,8 +10,8 @@ const Query = ({ data }) => {
   const [shortData] = useState(data);
   const router = useRouter();
   const redirect = useCallback(() => {
-    router.push(shortData.urlBase);
     console.log(shortData);
+    router.push(shortData.urlBase);
   });
   const [] = useTimeoutFn(redirect, 3000);
   return (
@@ -38,7 +38,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      data: data?.data,
+      data,
     },
   };
 }
