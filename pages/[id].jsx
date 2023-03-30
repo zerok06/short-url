@@ -28,7 +28,7 @@ const Query = ({ data }) => {
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const { data } = await axios.post(
-    `${process.env.HOST_URL}/api/short-url/search`,
+    `${process.env.VERCEL_URL || process.env.HOST_URL}/api/short-url/search`,
     { id }
   );
   return {
