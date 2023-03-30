@@ -28,14 +28,9 @@ const Query = ({ data }) => {
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  let data = {};
-  try {
-    data = await axios.post(`/api/short-url/search`, {
-      id,
-    });
-  } catch (error) {
-    console.error(error);
-  }
+  const { data } = await axios.post(`/api/short-url/search`, {
+    id,
+  });
   return {
     props: {
       data,
