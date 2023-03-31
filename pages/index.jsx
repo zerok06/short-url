@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import FormShortUrl from "../components/FormShortUrl";
 import NavBar from "../components/NavBar";
 import Qr from "../components/Qr";
@@ -10,30 +11,27 @@ export default function Home() {
       <NavBar />
       <main
         style={{
-          marginTop: "80px",
-          height: "90vh",
-          gridTemplateColumns: "2fr 1fr",
+          minHeight: "90vh",
+          /* gridTemplateColumns: "2fr 1fr", */
         }}
-        className=" bg-circles grid gap-10  w-9/12 m-auto"
+        className=" bg-circles gap-10 flex  mt-20 w-11/12 lg:w-9/12 m-auto  flex-col lg:flex-row lg:mt-20  "
       >
-        <div className=" flex justify-center items-start flex-col gap-5 ">
-          <h1 className="  text-6xl w-4/5">
+        <div className=" flex justify-center flex-1 items-center lg:items-start flex-col gap-5 ">
+          <h1 className=" text-center text-5xl lg:text-left lg:text-6xl  w-4/5">
             <span className="font-semibold">Acortar tu link sin</span>
             <span className="title-gradient font-extrabold"> crear cuenta</span>
           </h1>
-          <p className=" text-gray-500 w-4/5 text-lg">
+          <p className=" text-center lg:text-left text-gray-600 w-4/5 text-base lg:text-lg">
             ¿Cansado de URLs largas e inmanejables? ¡Prueba nuestra herramienta
             de acortamiento de URLs! No necesitas crear una cuenta, es fácil y
             rápido.
           </p>
           <FormShortUrl />
         </div>
-        <div>{urlShort && <Qr />}</div>
+        <div className="flex-1">{urlShort && <Qr />}</div>
       </main>
 
-      <footer className="w-full">
-        Desarrollador por el equipo de <a href="#">FoxDesign</a>
-      </footer>
+      <Footer />
     </>
   );
 }

@@ -7,10 +7,18 @@ const ShortUrlPreview = () => {
   let { urlShort } = useQrState((state) => state);
   urlShort = "http://" + window.location.host + "/" + urlShort;
   const copyText = (e) => {
-    navigator.clipboard.writeText(urlShort);
-    toast("URL copiada!", {
-      icon: "📝",
-    });
+    navigator.clipboard
+      ?.writeText(urlShort)
+      .then(() => {
+        toast("URL copiada!", {
+          icon: "📝",
+        });
+      })
+      .catch(() => {
+        toast("Navegador no soportado!", {
+          icon: "❌",
+        });
+      });
   };
   return (
     <motion.div

@@ -17,7 +17,7 @@ const FormShortUrl = () => {
   });
 
   const handleUrlBase = ({ target: { value } }) => {
-    if (!/(http|https)/.test(value)) {
+    if (!/(http\:\/\/|https\:\/\/)/.test(value)) {
       setFormData(() => ({
         ...FormData,
         urlBase: value,
@@ -56,24 +56,25 @@ const FormShortUrl = () => {
     <>
       <form
         action="#"
-        className="flex flex-col gap-4 w-full items-start"
+        className="flex flex-col gap-4 w-full items-center lg:items-start
+         "
         onSubmit={handleForm}
       >
         <label
           htmlFor=""
-          className="flex flex-col mt-3 w-full relative items-start"
+          className="flex flex-col mt-3 w-full relative items-center lg:items-start"
         >
           <input
             type="url"
             placeholder="www.google.com"
-            className="rounded leading-10 px-7 text-center outline-none w-1/3 focus:w-2/4 transition-all bg-gray-200"
+            className="rounded leading-10 px-7 text-center outline-none w-3/4 focus:w-4/4 transition-all bg-gray-200 shadow-2xl bg-opacity-70 placeholder:text-gray-500"
             onChange={handleUrlBase}
             value={FormData.urlBase}
           />
           {FormData.isValid == false && (
             <motion.span
               style={{ top: "-3rem" }}
-              className=" error-pop py-1 px-2 text-sm bg-white rounded-md mt-3 absolute shadow-xl"
+              className=" py-1 px-2 text-sm bg-white rounded-md mt-3 absolute shadow-xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.3 } }}
               exit={{ opacity: 0 }}

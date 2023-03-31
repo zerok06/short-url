@@ -10,9 +10,10 @@ const Query = ({ urlBase }) => {
   const router = useRouter();
   console.log(urlBase);
   const redirect = () => {
+    cancel();
     router.push(urlBase);
   };
-  const [] = useTimeoutFn(redirect, 3000);
+  const [isReady, cancel, reset] = useTimeoutFn(redirect, 3000);
   return (
     <>
       <NavBar />
@@ -28,7 +29,6 @@ const Query = ({ urlBase }) => {
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const { data } = await axiosInstance.post("/short-url/search", { id });
-  console.log(data);
   return {
     props: { ...data },
   };

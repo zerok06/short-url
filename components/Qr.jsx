@@ -47,10 +47,9 @@ const Qr = () => {
         <div className=" bg-white bg-opacity-70 shadow-2xl shadow-gray-300 rounded-3xl  py-5 px-5">
           <div
             style={{ height: "250px", width: "250px" }}
-            className="flex justify-center items-center"
+            className="flex justify-center items-center m-auto"
           >
             <QRCodeCanvas
-              className="m-0"
               value={"http://" + window.location.host + "/" + urlShort}
               size={controls.size}
               bgColor={"#ffffff"}
@@ -115,45 +114,47 @@ const Qr = () => {
                 }}
               />
             </label>
-            <div>
-              <label className="w-full flex justify-between items-center">
-                Imagen
-                <input
-                  className="bg-gray-200"
-                  type="url"
-                  placeholder="https://gatitos.com/1.png"
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    setControls(() => ({
-                      ...controls,
-                      includeImage: {
-                        ...controls.includeImage,
-                        src: e.target.value,
-                      },
-                    }));
-                  }}
-                />
-              </label>
-              <label className="w-full flex justify-between items-center">
-                Escala:
-                <input
-                  type="range"
-                  min={50}
-                  max={60}
-                  defaultValue={1}
-                  onChange={(e) =>
-                    setControls(() => ({
-                      ...controls,
-                      includeImage: {
-                        ...controls.includeImage,
-                        height: 24 * (e.target.value / 30),
-                        width: 24 * (e.target.value / 30),
-                      },
-                    }))
-                  }
-                />
-              </label>
-            </div>
+            {controls.statusImage == true && (
+              <div>
+                <label className="w-full flex justify-between items-center">
+                  Imagen
+                  <input
+                    className="bg-gray-200"
+                    type="url"
+                    placeholder="https://gatitos.com/1.png"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setControls(() => ({
+                        ...controls,
+                        includeImage: {
+                          ...controls.includeImage,
+                          src: e.target.value,
+                        },
+                      }));
+                    }}
+                  />
+                </label>
+                <label className="w-full flex justify-between items-center">
+                  Escala:
+                  <input
+                    type="range"
+                    min={50}
+                    max={60}
+                    defaultValue={1}
+                    onChange={(e) =>
+                      setControls(() => ({
+                        ...controls,
+                        includeImage: {
+                          ...controls.includeImage,
+                          height: 24 * (e.target.value / 30),
+                          width: 24 * (e.target.value / 30),
+                        },
+                      }))
+                    }
+                  />
+                </label>
+              </div>
+            )}
           </Controls>
         </div>
       </motion.div>
