@@ -16,11 +16,7 @@ module.exports = {
       lg: "976px",
       xl: "1440px",
     },
-    extend: {
-      fontFamily: {
-        sans: ["Inter", "sans-serif"],
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

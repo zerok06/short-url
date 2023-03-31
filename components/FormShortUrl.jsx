@@ -13,9 +13,15 @@ const FormShortUrl = () => {
   const [fetchData, setFetchData] = useState({});
   const [FormData, setFormData] = useState({
     urlBase: "",
+    redirectFast: false,
     isValid: null,
   });
-
+  const handleRedirectFast = (e) => {
+    setFormData(() => ({
+      ...FormData,
+      redirectFast: true,
+    }));
+  };
   const handleUrlBase = ({ target: { value } }) => {
     if (!/(http\:\/\/|https\:\/\/)/.test(value)) {
       setFormData(() => ({
@@ -41,6 +47,7 @@ const FormShortUrl = () => {
     console.log(FormData);
     const { data } = await axios.post("/api/short-url", {
       urlBase: FormData.urlBase,
+      redirectFast: FormData.redirectFast,
     });
     setFetchData(data);
     setUrlShort({ value: data?.shortUrl, status: true });
@@ -82,6 +89,10 @@ const FormShortUrl = () => {
               ❌ Verifique que la url tenga el protocolo 'http://'.
             </motion.span>
           )}
+        </label>
+        <label className="text-gray-400">
+          Redirecionamiento rapido
+          <input type="checkbox" onChange={handleRedirectFast} />
         </label>
         <span className="flex gap-4 items-center">
           <button

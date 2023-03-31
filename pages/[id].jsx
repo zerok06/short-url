@@ -8,7 +8,6 @@ import axiosInstance from "../config/axiosRequest";
 
 const Query = ({ urlBase }) => {
   const router = useRouter();
-  console.log(urlBase);
   const redirect = () => {
     cancel();
     router.push(urlBase);

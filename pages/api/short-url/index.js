@@ -6,7 +6,7 @@ export default async function handler(req = NextRequest, res = NextResponse) {
   const { method } = req;
   switch (method) {
     case "POST":
-      let { urlBase } = req.body;
+      let { urlBase, redirectFast = false } = req.body;
       if (!urlBase) {
         res.json({
           msg: "Falta parametros",
@@ -31,6 +31,7 @@ export default async function handler(req = NextRequest, res = NextResponse) {
 
         const newShortUrl = await ShortUrl.create({
           urlBase,
+          redirectFast,
           shortUrl: newCodeUrl,
         });
         const currentShortUrl = await newShortUrl.save();
