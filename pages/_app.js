@@ -7,7 +7,7 @@ import RootLayout from "../layouts/RootLayout";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         <Head>
           <title>FoxCut - Home</title>
         </Head>

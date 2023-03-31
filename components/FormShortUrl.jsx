@@ -1,15 +1,17 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { RegExr } from "../helpers/ExpresionReg";
 import useQrState from "../store/useQrStore";
 import ShortUrlPreview from "./ShortUrlPreview";
 import Spinner from "./Spinner";
+import ConfettiExplosion from "react-confetti-explosion";
 
 const FormShortUrl = () => {
   const { urlShort, setUrlShort } = useQrState((state) => state);
   const [isLoading, setIsLoading] = useState(null);
+  const [isExploding, setIsExploding] = useState(false);
   const [fetchData, setFetchData] = useState({});
   const [FormData, setFormData] = useState({
     urlBase: "",
@@ -23,6 +25,13 @@ const FormShortUrl = () => {
     }));
   };
   const handleUrlBase = ({ target: { value } }) => {
+    if (value == "") {
+      if (!window.matchMedia("only screen and (max-width: 768px)").matches) {
+        setIsExploding(false);
+      }
+      setIsLoading(null);
+      setUrlShort({ value: "" });
+    }
     if (!/(http\:\/\/|https\:\/\/)/.test(value)) {
       setFormData(() => ({
         ...FormData,
@@ -30,10 +39,6 @@ const FormShortUrl = () => {
         isValid: false,
       }));
     } else {
-      if (value == "") {
-        setIsLoading(null);
-        setUrlShort({ value: "" });
-      }
       setFormData(() => ({
         ...FormData,
         urlBase: value,
@@ -49,6 +54,9 @@ const FormShortUrl = () => {
       urlBase: FormData.urlBase,
       redirectFast: FormData.redirectFast,
     });
+    if (!window.matchMedia("only screen and (max-width: 768px)").matches) {
+      setIsExploding(true);
+    }
     setFetchData(data);
     setUrlShort({ value: data?.shortUrl, status: true });
     setIsLoading(true);
@@ -58,6 +66,9 @@ const FormShortUrl = () => {
       toast.success("URL acortada correctamente.");
     }
   };
+  useEffect(() => {
+    console.log(isExploding);
+  }, [isExploding]);
 
   return (
     <>
@@ -67,6 +78,9 @@ const FormShortUrl = () => {
          "
         onSubmit={handleForm}
       >
+        <h3 className="italic text-sm text-center lg:text-lg lg:text-left">
+          1️⃣ Primero, ingresa una URL.
+        </h3>
         <label
           htmlFor=""
           className="flex flex-col mt-3 w-full relative items-center lg:items-start"
@@ -80,11 +94,13 @@ const FormShortUrl = () => {
           />
           {FormData.isValid == false && (
             <motion.span
+              layout
               style={{ top: "-3rem" }}
               className=" py-1 px-2 text-sm bg-white rounded-md mt-3 absolute shadow-xl"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { duration: 0.3 } }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ duration: 0.3, type: "spring" }}
             >
               ❌ Verifique que la url tenga el protocolo 'http://'.
             </motion.span>
@@ -94,6 +110,10 @@ const FormShortUrl = () => {
           Redirecionamiento rapido
           <input type="checkbox" onChange={handleRedirectFast} />
         </label>
+        <h3 className="italic text-sm text-center lg:text-lg lg:text-left">
+          2️⃣Por Ultimo, presiona el boton de "Acortar".
+        </h3>
+
         <span className="flex gap-4 items-center">
           <button
             type="submit"
@@ -105,6 +125,17 @@ const FormShortUrl = () => {
           {isLoading == false && <Spinner />}
         </span>
       </form>
+      {isExploding && (
+        <>
+          <ConfettiExplosion
+            force={0.8}
+            duration={5000}
+            particleCount={300}
+            width={3000}
+          />
+          <audio src="/fiesta.mp3" autoPlay></audio>
+        </>
+      )}
     </>
   );
 };
