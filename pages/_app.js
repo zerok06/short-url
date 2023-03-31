@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
     <>
       <AnimatePresence>
         <Head>
-          <title>Foxify - Home</title>
+          <title>FoxCut - Home</title>
         </Head>
         <RootLayout>
           <Component {...pageProps} />
