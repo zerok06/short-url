@@ -12,7 +12,7 @@ const Query = ({ urlBase }) => {
     cancel();
     router.push(urlBase);
   };
-  const [isReady, cancel, reset] = useTimeoutFn(redirect, 3000);
+
   return (
     <>
       <NavBar />
