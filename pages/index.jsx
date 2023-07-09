@@ -18,7 +18,7 @@ export default function Home() {
       >
         <div className=" flex justify-center flex-1 items-center lg:items-start flex-col gap-5 ">
           <h1 className=" text-center text-5xl lg:text-left lg:text-6xl  w-4/5">
-            <span className="font-semibold">Acortar tu link sin</span>
+            <span className="font-extrabold">Acortar tu link sin</span>
             <span className="title-gradient font-extrabold"> crear cuenta</span>
           </h1>
           <p className=" text-center lg:text-left text-gray-600 w-4/5 text-base lg:text-lg">

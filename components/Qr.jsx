@@ -59,7 +59,7 @@ const Qr = () => {
               imageSettings={controls.statusImage ? controls.includeImage : {}}
             />
           </div>
-          <Controls>
+          <Controls className="accent-orange-500">
             <label className="w-full flex justify-between items-center">
               Nivel de precision:
               <select

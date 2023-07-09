@@ -75,7 +75,7 @@ const FormShortUrl = () => {
       <form
         action="#"
         className="flex flex-col gap-4 w-full items-center lg:items-start
-         "
+         accent-orange-500"
         onSubmit={handleForm}
       >
         <h3 className="italic text-sm text-center lg:text-lg lg:text-left">
